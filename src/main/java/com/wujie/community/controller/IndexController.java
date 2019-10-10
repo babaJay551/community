@@ -1,4 +1,4 @@
-package com.wujie.community;
+package com.wujie.community.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
