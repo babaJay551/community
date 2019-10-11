@@ -11,7 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
@@ -33,7 +34,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state,
-                           HttpServletRequest request){
+                           HttpServletResponse response){
 
         AccessTokenDto tokenDto = new AccessTokenDto();
         tokenDto.setClient_id(clientid);
@@ -47,7 +48,8 @@ public class AuthorizeController {
         GithubUser githubUser = githubProvider.getUser(accessToken);
         if (githubUser!=null){
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setName(githubUser.getName());
             System.out.println(user.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
@@ -57,9 +59,8 @@ public class AuthorizeController {
 
             //添加user数据
             userMapper.insert(user);
-
             //登录成功显示我的信息 并跳转到首页
-            request.getSession().setAttribute("user",githubUser);
+            response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else{
             //登录失败 跳转到首页
