@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class PaginationDto {
+public class PaginationDto<T> {
 
     //封装QuesionDto 的集合
-    private List<QuesionDto> quesionDtoList;
+    private List<T> data;
     //是否显示上一页
     private boolean showPrevious;
     //是否显示第一页
@@ -25,21 +25,12 @@ public class PaginationDto {
     //总页数
     private Integer totalPage;
 
-    public void setPagination(Integer totalCount, Integer currentPage, Integer pageSize) {
+    public void setPagination( Integer currentPage,Integer totalPage) {
 
-        if (totalCount % pageSize == 0){
-            totalPage=totalCount/pageSize;
-        }else{
-            totalPage=totalCount/pageSize+1;
-        }
 
-        if (currentPage<1){
-            currentPage=1;
-        }
-        if (currentPage>totalPage){
-            currentPage=totalPage;
-        }
+        //为currentPage设置属性值
         this.currentPage=currentPage;
+        this.totalPage=totalPage;
 
         //将页码添加到集合中
         pages.add(currentPage);

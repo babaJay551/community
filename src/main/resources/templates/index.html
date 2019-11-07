@@ -9,6 +9,19 @@
     <script src="js/jquery-min.js"></script>
     <script src="js/bootstrap.js" type="application/javascript"></script>
 
+    <script type="application/javascript">
+        //html页面debug方法 debugger;
+        //页面加载的方法
+        window.onload=function () {
+           //获取localStorage
+            var closeable = localStorage.getItem("closeable");
+            //如果需要关闭则关闭当前页
+            if (closeable=="true"){
+                window.close();
+                window.localStorage.removeItem("closeable");
+            }
+        }
+    </script>
 
 </head>
 <body>
@@ -21,14 +34,16 @@
             <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>发现</h2>
             <!--分割线-->
             <hr/>
-            <div class="media" th:each="quesion : ${pagination.quesionDtoList}">
+            <div class="media" th:each="quesion : ${pagination.data}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded" th:src="${quesion.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${quesion.title}"></h4>
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/'+${quesion.id}}" th:text="${quesion.title}"></a>
+                    </h4>
                     <span th:text="${quesion.description}"></span></br>
                     <span class="text-desc">
                         • <span th:text="${quesion.commentCount}"></span> 个回复

@@ -5,13 +5,16 @@ import com.wujie.community.dto.GithubUser;
 import com.wujie.community.mapper.UserMapper;
 import com.wujie.community.model.User;
 import com.wujie.community.provider.GithubProvider;
+import com.wujie.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -29,7 +32,8 @@ public class AuthorizeController {
     private String redirectUri;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
+
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
@@ -44,22 +48,18 @@ public class AuthorizeController {
         tokenDto.setState(state);
         String accessToken = githubProvider.getAccessToken(tokenDto);
         System.out.println(accessToken);
-        System.out.println("----");
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        if (githubUser!=null){
+        if (githubUser!=null&&githubUser.getId()!=null){
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(githubUser.getName());
-            System.out.println(user.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
-            System.out.println(user.getGmtCreate());
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatarUrl());
-
             //添加user数据
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
             //登录成功显示我的信息 并跳转到首页
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
@@ -68,5 +68,22 @@ public class AuthorizeController {
             return "redirect:/";
         }
 
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        //删除session
+        request.getSession().invalidate();
+        //删除cookie
+        Cookie cookie = new Cookie("token",null);
+        //立即删除
+        cookie.setMaxAge(0);
+        //任何目录
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "redirect:/";
     }
 }
