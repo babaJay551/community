@@ -49,6 +49,7 @@ public class CommentController {
         comment.setGmtModified(comment.getGmtCreate());
         comment.setCommentator(user.getId());
         comment.setLikeCount(0L);
+        comment.setCommentCount(1);
 
         //调用文本内容插入的方法
         commentService.insert(comment,user);

@@ -17,13 +17,14 @@ public class IndexController {
     @GetMapping("/")
     public String hello(Model model,
                         @RequestParam(name = "currentPage",defaultValue = "1") Integer currentPage,
-                        @RequestParam(name = "pageSize",defaultValue = "5") Integer pageSize) {
+                        @RequestParam(name = "pageSize",defaultValue = "5") Integer pageSize,
+                        @RequestParam(name = "search",required = false) String search) {
 
 
         //获取quesion完整数据的list(分页查询)
-        PaginationDto paginationDto = questionService.list(currentPage,pageSize);
+        PaginationDto paginationDto = questionService.list(search,currentPage,pageSize);
         model.addAttribute("pagination", paginationDto);
-
+        model.addAttribute("search",search);
         return "index";
     }
 }

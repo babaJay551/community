@@ -132,3 +132,8 @@ body{
     display: inline-block;
 }
 
+.footer{
+    padding: 10px 20%;
+    color: #666;
+}
+

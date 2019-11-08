@@ -65,6 +65,9 @@ function comment(e) {
 
     //调用评论方法
     comment2target(commentId, 2, content);
+
+    var  n = $("#commentCount").val();
+    alert(n);
 }
 
 

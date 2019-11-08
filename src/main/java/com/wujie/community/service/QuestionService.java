@@ -2,6 +2,7 @@ package com.wujie.community.service;
 
 import com.wujie.community.dto.PaginationDto;
 import com.wujie.community.dto.QuesionDto;
+import com.wujie.community.dto.QuestionQueryDto;
 import com.wujie.community.exception.CustomException;
 import com.wujie.community.exception.CustomizeErrorCode;
 import com.wujie.community.mapper.QuestionExtMapper;
@@ -36,13 +37,22 @@ public class QuestionService {
 
 
     //分页查询业务方法
-    public PaginationDto list(Integer currentPage, Integer pageSize){
+    public PaginationDto list(String search,Integer currentPage, Integer pageSize){
+
+        //获取用户查询的关键字内容
+        if (StringUtils.isNotBlank(search)){
+            //根据的空格进行拆分关键字
+            String[] searchChats = StringUtils.split(search," ");
+            search = Arrays.stream(searchChats).collect(Collectors.joining("|"));
+        }
 
         //总页数
         Integer totalPage;
         PaginationDto paginationDto =new PaginationDto();
         //查询question总记录数
-        Integer totalCount = (int)questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDto questionQueryDto = new QuestionQueryDto();
+        questionQueryDto.setSearch(search);
+        Integer totalCount = questionExtMapper.countBySearch(questionQueryDto);
 
         if (totalCount % pageSize == 0){
             totalPage=totalCount/pageSize;
@@ -61,11 +71,16 @@ public class QuestionService {
 
         //通过页面传递过来的 当前页码 与页大小
         Integer offset = (currentPage-1)*pageSize;
+        if (offset<1){
+            offset=1;
+        }
 
         //查询所有的question
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questionList = questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(offset,pageSize));
+        QuestionQueryDto questionQuery = new QuestionQueryDto();
+        questionQuery.setSearch(search);
+        questionQuery.setOffset(offset);
+        questionQuery.setPageSize(pageSize);
+        List<Question> questionList = questionExtMapper.selectBySearchWithRowbounds(questionQuery);
         List<QuesionDto> quesionDtoList = new ArrayList<>();
 
         for (Question question : questionList) {

@@ -54,7 +54,8 @@ public class GithubProvider {
             String string = response.body().string();
             Map<String,Object> map=new HashMap<String,Object>();
             map.put("name","小杰");
-            map.put("id","56109467");map.put("dio","");
+            map.put("id","56109466");
+            map.put("dio","");
             map.put("avatarUrl","https://avatars0.githubusercontent.com/u/56109466?v=4");
 
             JSONObject json = new JSONObject(map);
