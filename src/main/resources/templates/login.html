@@ -1,97 +1,108 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>bootstrap案例</title>
-    <!--用百度的静态资源库的cdn安装bootstrap环境-->
-    <!-- Bootstrap 核心 CSS 文件 -->
-    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!--font-awesome 核心我CSS 文件-->
-    <link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- 在bootstrap.min.js 之前引入 -->
-    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
-    <!-- Bootstrap 核心 JavaScript 文件 -->
-    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <!--jquery.validate-->
-    <script type="text/javascript" src="js/jquery.validate.min.js" ></script>
-    <script type="text/javascript" src="js/message.js" ></script>
-    <style type="text/css">
-        body{background: url(images/bg1.jpg) no-repeat;background-size:cover;font-size: 16px;}
-        .form{background: rgba(255,255,255,0.2);width:400px;margin:100px auto;}
-        #login_form{display: block;}
-        #register_form{display: none;}
-        .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
-        input[type="text"],input[type="password"]{padding-left:26px;}
-        .checkbox{padding-left:21px;}
-    </style>
-</head>
-<body>
 <!--
-    基础知识：
-    网格系统:通过行和列布局
-    行必须放在container内
-    手机用col-xs-*
-    平板用col-sm-*
-    笔记本或普通台式电脑用col-md-*
-    大型设备台式电脑用col-lg-*
-    为了兼容多个设备，可以用多个col-*-*来控制；
+Beyond Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3
+Version: 1.0.0
+Purchase: http://wrapbootstrap.com
 -->
-<div class="container">
-    <div class="form row">
-        <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form">
-            <h3 class="form-title">Login to your account</h3>
-            <div class="col-sm-9 col-md-9">
-                <div class="form-group">
-                    <i class="fa fa-user fa-lg"></i>
-                    <input class="form-control required" type="text" placeholder="Username" name="username" autofocus="autofocus" maxlength="20"/>
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-lock fa-lg"></i>
-                    <input class="form-control required" type="password" placeholder="Password" name="password" maxlength="8"/>
-                </div>
-                <div class="form-group">
-                    <label class="checkbox">
-                        <input type="checkbox" name="remember" value="1"/> Remember me
-                    </label>
-                    <hr />
-                    <a href="javascript:;" id="register_btn" class="">Create an account</a>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-success pull-right" value="Login "/>
-                </div>
-            </div>
-        </form>
-    </div>
 
-    <div class="form row">
-        <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form">
-            <h3 class="form-title">Login to your account</h3>
-            <div class="col-sm-9 col-md-9">
-                <div class="form-group">
-                    <i class="fa fa-user fa-lg"></i>
-                    <input class="form-control required" type="text" placeholder="Username" name="username" autofocus="autofocus"/>
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-lock fa-lg"></i>
-                    <input class="form-control required" type="password" placeholder="Password" id="register_password" name="password"/>
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-check fa-lg"></i>
-                    <input class="form-control required" type="password" placeholder="Re-type Your Password" name="rpassword"/>
-                </div>
-                <div class="form-group">
-                    <i class="fa fa-envelope fa-lg"></i>
-                    <input class="form-control eamil" type="text" placeholder="Email" name="email"/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-success pull-right" value="Sign Up "/>
-                    <input type="submit" class="btn btn-info pull-left" id="back_btn" value="Back"/>
-                </div>
-            </div>
-        </form>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!--Head-->
+<head>
+    <meta charset="utf-8"/>
+    <title>小杰社区</title>
+
+    <meta name="description" content="login page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!--Basic Styles-->
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="bootstrap-rtl-link" href="" rel="stylesheet" />
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">
+
+    <!--Beyond styles-->
+    <!--<link id="beyond-link" href="../../assets/css/beyond.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="../../assets/css/beyond.min.css">
+    <link href="../../assets/css/demo.min.css" rel="stylesheet" />
+    <link href="../../assets/css/animate.min.css" rel="stylesheet" />
+    <link id="skin-link" href="" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../../css/community.css">
+    <style>
+        body{
+            background-image: url("/images/bg1.jpg");
+        }
+    </style>
+
+    <script src="../../assets/js/skins.min.js"></script>
+</head>
+<!--Head Ends-->
+<!--Body-->
+<body id="body">
+<div class="login-container animated fadeInDown">
+    <div class="loginbox bg-white">
+        <div class="loginbox-title">登录</div>
+        <div class="loginbox-social">
+            <div class="social-title ">在线答疑教育系统</div>
+            <!--<div class="social-buttons">
+                <a href="" class="button-facebook">
+                    <i class="social-icon fa fa-facebook"></i>
+                </a>
+                <a href="" class="button-twitter">
+                    <i class="social-icon fa fa-twitter"></i>
+                </a>
+                <a href="" class="button-google">
+                    <i class="social-icon fa fa-google-plus"></i>
+                </a>
+            </div>-->
+        </div>
+        <!--<div class="loginbox-or">
+            <div class="or-line"></div>
+            <div class="or">OR</div>
+        </div>-->
+        <div class="loginbox-textbox">
+            <input id="name" type="text" class="form-control" placeholder="账号" />
+        </div>
+        <div class="loginbox-textbox">
+            <input id="password" type="text" class="form-control" placeholder="密码" />
+        </div>
+        <!--<div class="loginbox-forgot">
+            <a href="">Forgot Password?</a>
+        </div>-->
+        <div class="loginbox-submit">
+            <input type="button" class="btn btn-primary btn-block" value="登录">
+        </div>
+        <div class="loginbox-signup">
+            <a href="/register/toRegister">注册</a>
+        </div>
     </div>
+    <!--<div class="logobox">
+    </div>-->
 </div>
-<!--<script type="text/javascript" src="../static/js/login.js" ></script>-->
-    <script type="text/javascript" src="js/login.js"></script>
+
+<!--Basic Scripts-->
+<script src="../../assets/js/jquery-2.0.3.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+
+<!--Beyond Scripts-->
+<script src="../../assets/js/beyond.js"></script>
+<!--<script src="../../assets/js/beyond.js"></script>-->
+
+<!--Google Analytics::Demo Only-->
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-52103994-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
+<!--Body Ends-->
 </html>
