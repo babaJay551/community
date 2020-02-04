@@ -8,7 +8,6 @@ import okhttp3.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +52,7 @@ public class GithubProvider {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
             Map<String,Object> map=new HashMap<String,Object>();
+            //第三方加载登录失败请解开注释
             map.put("name","小杰");
             map.put("id","56109466");
             map.put("dio","");

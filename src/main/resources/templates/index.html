@@ -6,22 +6,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/community.css">
-    <script src="js/jquery-min.js"></script>
-    <script src="js/bootstrap.js" type="application/javascript"></script>
-
-    <script type="application/javascript">
-        //html页面debug方法 debugger;
-        //页面加载的方法
-        window.onload=function () {
-           //获取localStorage
-            var closeable = localStorage.getItem("closeable");
-            //如果需要关闭则关闭当前页
-            if (closeable=="true"){
-                window.close();
-                window.localStorage.removeItem("closeable");
-            }
-        }
-    </script>
 
 </head>
 <body>
@@ -107,24 +91,44 @@
             </nav>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h2>热门话题</h2>
-            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字<br>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div><div>
+                    <!--公众号-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side">
+                        <h4>CDSN</h4>
+                        <img class="img-thumbnail question-wechat" src="/images/qr_wechat.png">
+                    </div>
+                </div></div>
 
-            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料：<br>
+                <div><div>
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side">
+                        <h4>码匠笔记</h4>
+                        <img class="img-thumbnail question-wechat" src="/images/official-account.png">
+                    </div>
 
-            <p>服务器运行环境信息；</p>
-            <p>软件版本；</p>
-            <p>问题发生的上下文信息；</p>
-            <p>可以完整复现问题的代码（如可直接运行于 Kibana Console 的复现流程）；</p>
-            <p>补充完整的异常和错误信息；</p>
-            <p>注意阅读格式友好，代码和异常信息请用代码标签格式化张贴；</p>
-            • 选择标签: 选择一个或者多个合适的标签，每个标签不超过10个字<br>
-
-            • 关于积分： 发起一个问题会消耗您 20 个积分, 每多一个回复你将获得 5 个积分的奖励 ,为了您的利益, 在发起问题的时候希望能够更好的描述您的问题以及多使用站内搜索功能.<br>
-
+                </div></div>
+            </div>
         </div>
     </div>
 </div>
 <div th:insert="~{footer :: foot}"></div>
 </body>
+<script src="js/jquery-min.js"></script>
+<script src="js/bootstrap.js" type="application/javascript"></script>
+
+<script type="application/javascript">
+    //html页面debug方法 debugger;
+    //页面加载的方法
+    window.onload=function () {
+        //获取localStorage
+        var closeable = localStorage.getItem("closeable");
+        //如果需要关闭则关闭当前页
+        if (closeable=="true"){
+            window.close();
+            window.localStorage.removeItem("closeable");
+        }
+    }
+</script>
+
 </html>

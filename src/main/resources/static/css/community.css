@@ -1,113 +1,128 @@
-body{
+body {
     background-color: #efefef;
+    background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580553847574&di=9d3dc9346f68bc5ba079d1a06306ee1c&imgtype=0&src=http%3A%2F%2Fhiphotos.baidu.com%2Ffeed%2Fpic%2Fitem%2F14ce36d3d539b600a2ea8d63e550352ac65cb73a.jpg');
+    background-size: 100% 100%;
 }
 
-.main{
+.main {
     background-color: white;
     margin: 30px;
 }
 
-.btn-publish{
+.side {
+    margin: 5px 0;
+}
+
+.top-header {
+    padding-left: 20px;
+}
+
+.community-tag:hover {
+    background-color: #339dff;
+    color: #fff !important;
+    text-decoration-line: none;
+}
+
+.community-tag {
+    text-decoration-line: none;
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    line-height: 16px;
+    padding: 2px 5px;
+    background-color: #99cfff;
+    font-size: 12px;
+    color: #fff !important;
+    border-radius: 4px;
+    margin: 4px;
+}
+
+.btn-publish {
     float: right;
     margin-bottom: 15px;
 }
 
-.media-object{
-    width: 46px;
-    height: 44px;
+.media-object {
+    width: 38px;
+    height: 38px;
 }
 
-.media-body{
+.media-body {
     padding-top: 10px;
 }
 
-.text-desc{
+.text-desc {
     font-size: 12px;
     font-weight: normal;
     color: #999;
 }
 
-.profile .section{
+.profile .section {
     margin-top: 15px;
 }
 
-.community-menu{
+.question-title {
+    margin-top: 25px;
+}
+
+.question-tag {
+    margin-right: 5px;
+}
+
+.question-related {
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
+.question-wechat {
+    width: 95%;
+}
+
+.publish-tag-tab {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.publish-tag-tab .label-info {
+    white-space: normal;
+    margin: 5px 5px;
+    display: inline-block;
+}
+
+.community-menu {
+    color: #999;
     font-size: 13px;
-    color: #9d9d9d;
     margin-bottom: 15px;
 }
 
-.jumbotron{
-    margin-left: 60px;
+.jumbotron {
+    margin: 50px;
 }
 
-.comment{
+.comment {
     margin: 10px 0;
 }
 
-.btn-comment{
+.btn-comment {
     float: right;
     margin-bottom: 10px;
 }
 
-.comment-spec{
-    margin-top: 0px;
-}
-
-.menu{
-    color: #999999;
-    margin-top: 5px;
-}
-
-.menu .icon{
-    margin-right: 6px;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.menu .comment-icon{
-    font-size: 15px;
-    cursor: pointer;
-}
-.menu .comment-icon:hover{
-    color: #499ef3;
-}
-
-.menu .active{
-    color: #499ef3;
-}
-
-.menu .icon:hover{
-    color: #499ef3;
-}
-
-.question-related {
-    font-size: 13px;
-    line-height: 20px;
-    margin-left: 0;
-    padding-left: 0;
-    text-decoration: none;
-}
-
-.comments{
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eeeeee;
+.comments {
     padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
-.question-title{
-    margin-top: 25px;
-}
-
-.question-tag{
-    margin-right: 5px;
-}
-
-.sub-comments{
-    margin-top: 15px;
-    border: 1px solid #eee;
-    padding: 15px;
+.sub-comments {
     border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
     margin-bottom: 15px;
 }
 
@@ -115,25 +130,56 @@ body{
     margin: 10px 0;
 }
 
-.question-fm{
-    width: 100%;
+.comment-sp {
+    margin-top: 0;
 }
 
-.publish-tag-tab{
-    display: none;
-    margin-top: 10px;
-    padding-top: 10px;
+.menu {
+    color: #999;
+    margin-top: 5px;
 }
 
-.publish-tag-tab .label-info{
-    margin-right: 10px;
-    white-space: normal;
-    margin: 5px 5px;
-    display: inline-block;
+.menu .icon {
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
-.footer{
-    padding: 10px 20%;
-    color: #666;
+.menu .comment-icon {
+    font-size: 15px;
+    cursor: pointer;
 }
 
+.menu .comment-icon :hover {
+    color: #499ef3;
+}
+
+.menu .active {
+    color: #499ef3;
+}
+
+.menu .icon:hover {
+    color: #499ef3;
+}
+
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #666;;
+    padding: 0 0 15px 0;
+}
+
+.red {
+    color: red !important;
+}
+
+.row{
+
+    background-image: url('https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3770950532,1782857194&fm=26&gp=0.jpg');
+    background-size: 100% 100%;
+
+}
+
+#question-view{
+    background-color: inherit;
+}
