@@ -11014,7 +11014,12 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     color: #858585;
     background-color: #fbfbfb;
     border: 1px solid #d5d5d5;
-    padding: 6px 12px
+    padding: 6px 12px;
+
+}
+
+.codeFiled{
+    width: 100px;
 }
 
 .form-control:focus, select:focus {

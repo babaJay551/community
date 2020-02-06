@@ -41,7 +41,8 @@ function comment2target(targetId, type, content) {
                 if (response.code = 2003) {
                     var isAccepted = window.confirm(response.message);
                     if (isAccepted) {
-                        window.open("https://github.com/login/oauth/authorize?client_id=e09fab738cc3cb2c6538&redirect_uri=http://localhost:8087/callback&scope=user&state=1");
+                        //window.open("https://github.com/login/oauth/authorize?client_id=e09fab738cc3cb2c6538&redirect_uri=http://localhost:8087/callback&scope=user&state=1");
+                        window,open("/login/toLogin");
                         //在请求时设置一个隐式传递
                         localStorage.setItem("closeable", true);
                     }

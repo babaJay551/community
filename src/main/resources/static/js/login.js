@@ -1,4 +1,4 @@
-$().ready(function() {
+/*$().ready(function() {
     $("#login_form").validate({
         rules: {
             username: "required",
@@ -55,4 +55,38 @@ $(function() {
         $("#register_form").css("display", "none");
         $("#login_form").css("display", "block");
     });
-});
+});*/
+
+function login() {
+
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var code = $("#verify_code").val();
+
+/*
+    var formData = new FormData();
+    formData.append(username);
+    formData.append(password);
+    formData.append(code);
+*/
+
+    $.ajax({
+        url:'/login',
+        contentType: "application/json",
+        dataType:'json',
+        data:{
+            'username':username,
+            'password':password,
+            'code':code
+        }/*,
+        success:function (res) {
+            if (res){
+                alert("登录成功!")
+            }else{
+                alert("登录失败!")
+            }
+        }*/
+    })
+
+
+}
