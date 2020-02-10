@@ -57,36 +57,63 @@ $(function() {
     });
 });*/
 
-function login() {
 
-    var username = $("#username").val();
-    var password = $("#password").val();
-    var code = $("#verify_code").val();
+layui.use(['form', 'layer', 'jquery'], function () {
+    var form = layui.form,
+        layer = parent.layer === undefined ? layui.layer : top.layer
+    $ = layui.jquery;
 
-/*
-    var formData = new FormData();
-    formData.append(username);
-    formData.append(password);
-    formData.append(code);
-*/
-
-    $.ajax({
-        url:'/login',
-        contentType: "application/json",
-        dataType:'json',
-        data:{
-            'username':username,
-            'password':password,
-            'code':code
-        }/*,
-        success:function (res) {
-            if (res){
-                alert("登录成功!")
-            }else{
-                alert("登录失败!")
+    //登录按钮
+    form.on('submit(login)', function (result) {
+        var btn = $(this);
+        //设置登录按钮  为不可点击
+        btn.text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
+        $.ajax({
+            url: '/login/login',
+            contentType: "application/json",
+            dataType: 'json',
+            type:"post",
+            data: JSON.stringify(result.field),
+            success: function (res) {
+                //失败，返回错误信息
+                if (res.code!=200) {
+                    layer.msg(res.msg);
+                    //设置登录按钮  为不可点击
+                    btn.text("登录").attr("disabled", false).removeClass("layui-disabled");
+                    $(function () {
+                        changeImg();
+                    })
+                } else {
+                    //成功，跳转到首页
+                    layer.msg(res.msg);
+                    location.href = "/";
+                }
             }
-        }*/
-    })
+        })
+    });
 
+    //表单输入效果
+    $(".loginBody .input-item").click(function (e) {
+        e.stopPropagation();
+        $(this).addClass("layui-input-focus").find(".layui-input").focus();
+    })
+    $(".loginBody .layui-form-item .layui-input").focus(function () {
+        $(this).parent().addClass("layui-input-focus");
+    })
+    $(".loginBody .layui-form-item .layui-input").blur(function () {
+        $(this).parent().removeClass("layui-input-focus");
+        if ($(this).val() != '') {
+            $(this).parent().addClass("layui-input-active");
+        } else {
+            $(this).parent().removeClass("layui-input-active");
+        }
+    })
+})
+
+/* 触发JS刷新  切换图片*/
+function changeImg() {
+    var img = document.getElementById("verify_code_img");
+    img.src = "/verifyCode/getImg?date=" + new Date();
 
 }
+

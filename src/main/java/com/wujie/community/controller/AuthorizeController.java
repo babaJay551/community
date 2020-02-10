@@ -2,7 +2,6 @@ package com.wujie.community.controller;
 
 import com.wujie.community.dto.AccessTokenDto;
 import com.wujie.community.dto.GithubUser;
-import com.wujie.community.mapper.UserMapper;
 import com.wujie.community.model.User;
 import com.wujie.community.provider.GithubProvider;
 import com.wujie.community.service.UserService;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
@@ -52,14 +50,10 @@ public class AuthorizeController {
         if (githubUser!=null&&githubUser.getId()!=null){
             User user = new User();
             String token = UUID.randomUUID().toString();
-            user.setToken(token);
             user.setName(githubUser.getName());
-            user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatarUrl());
             //添加user数据
-            userService.createOrUpdate(user);
+//            userService.createOrUpdate(user);
             //登录成功显示我的信息 并跳转到首页
             response.addCookie(new Cookie("token",token));
             return "redirect:/";

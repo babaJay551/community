@@ -1,141 +1,86 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<!--Head-->
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8">
     <title>小杰社区</title>
-
-    <meta name="description" content="register page"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-    <!--Basic Styles-->
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link id="bootstrap-rtl-link" href="" rel="stylesheet"/>
-    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet"/>
-
-    <!--Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300"
-          rel="stylesheet" type="text/css">
-
-    <!--Beyond styles-->
-    <link rel="stylesheet" href="../../assets/css/beyond.min.css">
-    <link href="../../assets/css/demo.min.css" rel="stylesheet"/>
-    <link href="../../assets/css/animate.min.css" rel="stylesheet"/>
-    <link id="skin-link" href="" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="../../css/bootstrap-fileinput.css">
-    <style>
-        body {
-            background-image: url("/images/bg1.jpg");
-        }
-    </style>
-
-    <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
-    <script src="../../assets/js/skins.min.js"></script>
+    <link rel="stylesheet" href="../../layui/css/layui.css"/>
+    <link rel="stylesheet" href="../../css/public.css">
 </head>
-<!--Head Ends-->
-<!--Body-->
-<body>
-<div class="register-container animated fadeInDown">
-    <div class="registerbox bg-white">
-        <div class="registerbox-title">注册</div>
 
-        <div class="registerbox-caption "></div>
-        <div class="registerbox-textbox">
-            <input id="username" type="text" class="form-control" placeholder="账号"/>
-        </div>
-        <div class="registerbox-textbox">
-            <input id="password" type="password" class="form-control" placeholder="密码"/>
-        </div>
-        <div class="registerbox-textbox">
-            <input id="token" type="password" class="form-control" placeholder="确认密码"/>
-        </div>
-        <div class="registerbox-textbox">
-            <input id="name" type="text" class="form-control" placeholder="用户名"/>
-        </div>
-        <div class="registerbox-textbox">
-            <label class="control-label">性别：</label>
-            <label class="radio-inline">
-                <input type="radio" name="sex" value="0" checked>男
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="sex" value="1">女
-            </label>
-        </div>
+<body style="background-image: url('/images/bg2.jpg')">
 
-        <!--上传头像-->
-        <div class="registerbox-textbox">
-            <div class="fileinput fileinput-new" data-provides="fileinput" id="uploadImageDiv">
-                <div class="fileinput-new thumbnail" style="width: 50px; height: 50px;">
-                    <img src="${companyInfo.image}" alt="" />
-                </div>
-                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                <div>
-            <span class="btn default btn-file">
-            <span class="fileinput-new">选择图片</span>
-            <span class="fileinput-exists">更改</span>
-            <input type="file" name="uploadImage" id="uploadImage" />
-            </span>
-                    <a href="#" class="btn default fileinput-exists" data-dismiss="fileinput">移除</a>
-                    <span>请选择1M以内图片</span>
-                </div>
+<div id="gb">
+    <form class="layui-form" action="">
+        <input type="hidden" id="us" th:value="${session.user}">
+        <input type="hidden" name="id" th:if="${session.user!=null}" th:value="${session.user.id}">
+        <div class="registerbox-title">用户注册中心</div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户账号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="username" required lay-verify="required" placeholder="请输入账号" autocomplete="off"
+                       th:value="${session.user!=null?session.user.username:''}" class="layui-input">
             </div>
         </div>
-        <div class="registerbox-submit">
-            <input type="button" class="btn btn-primary pull-right" value="注册">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="pwd" placeholder="请输入密码" autocomplete="off"
+                       th:value="${session.user!=null?session.user.password:''}" class="layui-input" id="pass1">
+            </div>
         </div>
-    </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="passwords" required lay-verify="pwd" placeholder="请再次输入密码"
+                       th:value="${session.user!=null?session.user.password:''}" autocomplete="off" class="layui-input" id="pass2">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block" th:if="${session.user!=null}">
+                <input type="radio" class="layui-disabled" disabled="disabled" name="sex" value="0" checked="${session.user.sex==0?'checked':''}" title="男">
+                <input type="radio" class="layui-disabled" disabled="disabled" name="sex" value="1" checked="${session.user.sex==1?'checked':''}" title="女">
+            </div>
+            <div class="layui-input-block" th:if="${session.user==null}">
+                <input type="radio" name="sex" value="0" title="男" checked>
+                <input type="radio" name="sex" value="1" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">真实姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" required lay-verify="name" placeholder="请输入您的姓名"
+                       th:value="${session.user!=null?session.user.name:''}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" th:src="${session.user!=null?session.user.avatarUrl:'/images/mr.png'}"
+                         width="100px" height="100px" id="demo1">
+                    <p id="demoText"></p>
+                </div>
+                <!--上传返回的图片地址-->
+                <input type="hidden" name="avatarUrl" id="uploadImg" value="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <a style="text-decoration:underline	;padding-right: 20px;color: #2badce" href="/">回首页</a>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">注册</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
 </div>
-
-<script src="../../js/bootstrap-fileinput.js"></script>
-<script src="../../assets/js/jquery-2.0.3.min.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/beyond.min.js"></script>
-<script>
-    var url = '';
-    $("#uploadImage").fileupload({
-        url : ROOT + "/security/company/uploadFile",
-        dataType : 'json',
-        autoUpload : false,
-        acceptFileTypes : /(gif|jpe?g|png)$/i,
-        maxFileSize : 1000000, // 1 MB
-        imageMaxWidth : 100,
-        imageMaxHeight : 100,
-        messages : {
-            acceptFileTypes : '文件类型不匹配',
-            maxFileSize : '文件过大',
-            minFileSize : '文件过小'
-        }
-    }).on("fileuploadadd", function(e, data) {
-        // 当文件添加上去时候调用
-        $("#titleImageError").html("");
-        data.submit()
-    }).on("fileuploaddone", function(e, data) {
-        // 上传完成时调用
-        if (data.result.returnState == "ERROR") {
-            alert("上传失败")
-            return;
-        }
-        url = data.result.returnData.url;
-    });
-
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-52103994-1', 'auto');
-    ga('send', 'pageview');
-
-</script>
 </body>
-<!--Body Ends-->
+
+<script type="text/javascript" src="../../js/jquery-min.js"></script>
+<!--<script type="text/javascript" src="../../layui/layui.all.js"></script>-->
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/register.js"></script>
+
 </html>

@@ -2,7 +2,6 @@ package com.wujie.community.service;
 
 import com.wujie.community.dto.NotificationDto;
 import com.wujie.community.dto.PaginationDto;
-import com.wujie.community.dto.QuesionDto;
 import com.wujie.community.enums.NotificationStatusEnum;
 import com.wujie.community.enums.NotificationTypeEnum;
 import com.wujie.community.exception.CustomException;

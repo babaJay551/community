@@ -47,6 +47,12 @@
         </dependency>
 
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.6.6</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.57</version>
@@ -88,6 +94,7 @@
             <version>1.18.10</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>

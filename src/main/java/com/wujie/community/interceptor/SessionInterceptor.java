@@ -30,17 +30,17 @@ public class SessionInterceptor implements HandlerInterceptor {
         if (cookies != null && cookies.length != 0)
             for (Cookie cookie : cookies) {
                 //如果cookie中有值 证明用户登录过
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    //通过githubUser获取唯一表示 token 查找对象
-                    UserExample userExample = new UserExample();
-                    userExample.createCriteria().andTokenEqualTo(token);
-                    List<User> users = userMapper.selectByExample(userExample);
-                    if (users.size() != 0) {
+                if (cookie.getName().equals("uid")) {
+                    String id = cookie.getValue();
+                    //通过用户名去查找对象
+                    UserExample personExample = new UserExample();
+                    personExample.createCriteria().andIdEqualTo(Long.parseLong(id));
+                    List<User> userList = userMapper.selectByExample(personExample);
+                    if (userList.size() != 0) {
                         //放入session域中  方便前端页面显示
-                        request.getSession().setAttribute("user", users.get(0));
+                        request.getSession().setAttribute("user", userList.get(0));
                         //通知数
-                        Long unreadCount = notificationSevice.unreadCount(users.get(0).getId());
+                        Long unreadCount = notificationSevice.unreadCount(userList.get(0).getId());
                         request.getSession().setAttribute("unreadCount",unreadCount);
                     }
                     break;

@@ -81,7 +81,9 @@
                             <h5 class="media-heading">
                                 <span th:text="${comment.user.name}"></span>
                             </h5>
-                            <div th:text="${comment.content}"></div>
+                            <div>
+                                <span th:text="${comment.content}"></span>
+                            </div>
                             <div class="menu">
                                 <span class="glyphicon glyphicon-thumbs-up icon"></span>
                                 <span th:data-id="${comment.id}" onclick="collapseComments(this)" class="comment-icon">
@@ -117,7 +119,7 @@
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <input type="text" class="form-control" placeholder="评论一下..."
-                                           th:id="${'input-'+comment.id}">
+                                            th:id="${'input-'+comment.id}">
                                     <button type="button" class="btn btn-success pull-right" th:data-id="${comment.id}"
                                             onclick="comment(this)">评论
                                     </button>

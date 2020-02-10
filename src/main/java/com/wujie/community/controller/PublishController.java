@@ -2,7 +2,6 @@ package com.wujie.community.controller;
 
 import com.wujie.community.cache.TagCache;
 import com.wujie.community.dto.QuesionDto;
-import com.wujie.community.mapper.QuestionMapper;
 import com.wujie.community.model.Question;
 import com.wujie.community.model.User;
 import com.wujie.community.service.QuestionService;

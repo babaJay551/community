@@ -12,96 +12,46 @@
     <!--<link rel="icon" href="/resources/favicon.ico">-->
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../css/public.css" media="all">
+
 </head>
 <body class="loginBody">
 <form class="layui-form">
-    <div class="login_face"><img src="../../images/Wjlogo.png" class="userAvatar"></div>
+    <div class="login_face">
+        <img src="../../images/Wjlogo.png" height="60px" class="userAvatar">
+    </div>
+    <div>
+        <div class="loginbox-title">登录</div>
+        <div class="loginbox-social">
+            <div class="social-title">在线答疑教育系统</div>
+    </div>
     <div class="layui-form-item input-item">
-        <label for="userName">用户名</label>
-        <input type="text" placeholder="请输入用户名" autocomplete="off" name="loginname" class="layui-input"
+        <label>用户名</label>
+        <input type="text" placeholder="请输入用户名" autocomplete="off" name="username" class="layui-input"
                lay-verify="required">
     </div>
     <div class="layui-form-item input-item">
-        <label for="password">密码</label>
-        <input type="password" placeholder="请输入密码" autocomplete="off" name="pwd" class="layui-input"
+        <label>密码</label>
+        <input type="password" placeholder="请输入密码" autocomplete="off" name="password" class="layui-input"
                lay-verify="required">
     </div>
     <div class="layui-form-item input-item" id="imgCode">
+        <input type="text" placeholder="请输入验证码" name="code" autocomplete="off" id="code" class="layui-input">
         <img style="margin-right: 20px" width="100px" id="verify_code_img" height="32"
              src="/verifyCode/getImg" onclick="javascript:changeImg()"><br>
-        <a href="#" class="doc-color-link desc"
-           onclick="javascript:changeImg()">看不清，换一个？</a>
     </div>
     <div class="layui-form-item">
         <button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
     </div>
-    <div class="layui-form-item layui-row">
-        <a href="javascript:;" class="seraph icon-qq layui-col-xs4 layui-col-sm4 layui-col-md4 layui-col-lg4"></a>
-        <a href="javascript:;" class="seraph icon-wechat layui-col-xs4 layui-col-sm4 layui-col-md4 layui-col-lg4"></a>
-        <a href="javascript:;" class="seraph icon-sina layui-col-xs4 layui-col-sm4 layui-col-md4 layui-col-lg4"></a>
-
+    <div class="layui-form-item">
+        <a href="/register/toRegister">还未账户？点击注册</a>
+        <a style="text-decoration:underline	;padding-left: 10px;color: #2badce" href="/">回首页</a>
+        <!--<input id="butt" type="button" value="注册" /><br><br><br>-->
     </div>
 </form>
-
 </body>
+
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/cache.js"></script>
+<script type="text/javascript" src="../../js/login.js"></script>
 
-<script type="text/javascript">
-
-    layui.use(['form', 'layer', 'jquery'], function () {
-        var form = layui.form,
-            layer = parent.layer === undefined ? layui.layer : top.layer
-        $ = layui.jquery;
-
-        /*   $(".loginBody .seraph").click(function(){
-              layer.msg("这只是做个样式，至于功能，你见过哪个后台能这样登录的？还是老老实实的找管理员去注册吧",{
-                  time:5000
-              });
-          }) */
-
-        //登录按钮
-        form.on('submit(login)', function (data) {
-            var btn = $(this);
-            //设置登录按钮  为不可点击
-            btn.text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
-            $.post("/login/login", data.field, function (rs) {
-                //设置登录按钮 恢复可点击   在前端防止 重复点击
-                btn.text("登录").attr("disabled", false).removeClass("layui-disabled");
-                if (rs.code != 200) {
-                    layer.msg(rs.msg);
-                } else {
-                    //跳转到templates/system/index/index.html页面
-                    layer.msg(rs.msg);
-                    location.href = "/sys/index";
-                }
-            });
-        })
-
-        //表单输入效果
-        $(".loginBody .input-item").click(function (e) {
-            e.stopPropagation();
-            $(this).addClass("layui-input-focus").find(".layui-input").focus();
-        })
-        $(".loginBody .layui-form-item .layui-input").focus(function () {
-            $(this).parent().addClass("layui-input-focus");
-        })
-        $(".loginBody .layui-form-item .layui-input").blur(function () {
-            $(this).parent().removeClass("layui-input-focus");
-            if ($(this).val() != '') {
-                $(this).parent().addClass("layui-input-active");
-            } else {
-                $(this).parent().removeClass("layui-input-active");
-            }
-        })
-    })
-
-    /* 触发JS刷新  切换图片*/
-    function changeImg() {
-        var img = document.getElementById("verify_code_img");
-        img.src = "/verifyCode/getImg?date=" + new Date();
-    }
-
-
-</script>
 </html>
