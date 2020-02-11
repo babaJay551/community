@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>小杰社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,10 +18,15 @@
             <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>发现</h2>
             <!--分割线-->
             <hr/>
-            <div class="media" th:each="quesion : ${pagination.data}">
+            <div class="media" th:each="quesion,q : ${pagination.data}">
+                <input type="hidden" th:id="${'imgs-'+q.index}" th:value="${quesion.user.avatarUrl}">
                 <div class="media-left">
                     <a href="#">
-                        <img class="media-object img-rounded" th:src="${quesion.user.avatarUrl}">
+                        <!--<img class="media-object img-rounded" th:src="${quesion.user.avatarUrl!=null?question.user.avatarUrl:'/images/mr.png'}">-->
+                        <!--<img class="media-object img-rounded" th:if="${quesion.user.avatarUrl==null}" src="/images/mr.png">-->
+                        <!--<img class="media-object img-rounded" th:src="${quesion.user.avatarUrl}">-->
+                        <img class="media-object img-rounded" th:id="${'avaUrl-'+q.index}">
+
                     </a>
                 </div>
                 <div class="media-body">
@@ -123,11 +128,20 @@
         //获取localStorage
         var closeable = localStorage.getItem("closeable");
         //如果需要关闭则关闭当前页
-        if (closeable=="true"){
+        if (closeable=="true") {
             window.close();
             window.localStorage.removeItem("closeable");
         }
+
+        //头像展示
+        for (var i=0;i<5;i++){
+            var img = document.getElementById("imgs-"+i);
+            $("#avaUrl-"+i).attr("src","/register/showImage?path="+img.defaultValue);
+        }
+
     }
+
+
 </script>
 
 </html>

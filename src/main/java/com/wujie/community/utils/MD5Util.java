@@ -2,6 +2,9 @@ package com.wujie.community.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * md5 加密方法工具类
+ */
 public class MD5Util {
 
     public static String MD5(String inStr) {

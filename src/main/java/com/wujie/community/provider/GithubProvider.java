@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 调用第三方登录API方法（弃用）
+ */
+
 @Component
 public class GithubProvider {
 

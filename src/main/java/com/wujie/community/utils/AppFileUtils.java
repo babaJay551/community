@@ -78,13 +78,13 @@ public class AppFileUtils {
 
     /**
      * 去掉  _temp
-     * @param goodsimg
+     * @param img
      * @return
      */
-    public static String rename(String goodsimg) {
+    public static String rename(String img) {
 
-        File file=new File(UPLOAD_PATH, goodsimg);
-        String replace = goodsimg.replace("_temp", "");
+        File file=new File(UPLOAD_PATH, img);
+        String replace = img.replace("_temp", "");
         if (file.exists()){
             file.renameTo(new File(UPLOAD_PATH,replace));
         }
@@ -93,12 +93,12 @@ public class AppFileUtils {
 
     /**
      * 删除原来的照片
-     * @param goodsimg
+     * @param img
      */
-    public static void removeFileByPath(String goodsimg) {
+    public static void removeFileByPath(String img) {
 
-        if (!goodsimg.equals("images/timg.jpg")){
-            File file=new File(UPLOAD_PATH, goodsimg);
+        if (!img.equals("images/timg.jpg")){
+            File file=new File(UPLOAD_PATH, img);
             if (file.exists()){
                 file.delete();
             }

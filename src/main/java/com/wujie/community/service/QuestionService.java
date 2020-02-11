@@ -71,7 +71,7 @@ public class QuestionService {
         //通过页面传递过来的 当前页码 与页大小
         Integer offset = (currentPage-1)*pageSize;
         if (offset<1){
-            offset=1;
+            offset=0;
         }
 
         //查询所有的question

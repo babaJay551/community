@@ -23,10 +23,11 @@
             <hr/>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${section=='questions'}">
-            <div class="media" th:each="quesion : ${pagination.data}">
+            <div class="media" th:each="quesion,q : ${pagination.data}">
+                <input type="hidden" th:id="${'imgs-'+q.index}" th:value="${quesion.user.avatarUrl}">
                 <div class="media-left">
                     <a href="#">
-                        <img class="media-object img-rounded" th:src="${quesion.user.avatarUrl}">
+                        <img class="media-object img-rounded" th:id="${'avaUrl-'+q.index}">
                     </a>
                 </div>
                 <div class="media-body">
@@ -113,4 +114,17 @@
 
 <div th:insert="~{footer :: foot}"></div>
 </body>
+<script type="application/javascript">
+    window.onload=function () {
+        //图片
+        for (var i=0;i<5;i++){
+            var img = document.getElementById("imgs-"+i);
+            $("#avaUrl-"+i).attr("src","/register/showImage?path="+img.defaultValue);
+        }
+
+
+
+    }
+
+</script>
 </html>

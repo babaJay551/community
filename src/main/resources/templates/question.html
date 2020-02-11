@@ -138,10 +138,11 @@
                 </h4>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment-spec"/>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="comment_section">
+                    <input type="hidden" id="imgs02" th:if="${session.user!=null}" th:value="${session.user.avatarUrl}">
                     <div class="media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object img-rounded" th:src="${session.user!=null?session.user.avatarUrl:'/images/default-avatar.png'}">
+                                <img class="media-object img-rounded" id="avaUrl02">
                             </a>
                         </div>
                         <div class="media-body">
@@ -163,11 +164,12 @@
         <!--右边提示信息内容-->
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input type="hidden" id="imgs" th:value="${question.user.avatarUrl}">
                 <h4>发起人</h4>
                 <div class="media">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
+                            <img class="media-object img-rounded" id="avaUrl">
                         </a>
                     </div>
                     <div class="media-body">
@@ -199,4 +201,19 @@
 </div>
 <div th:insert="~{footer :: foot}"><div>
 </body>
+<script type="application/javascript">
+    window.onload=function () {
+
+        var img = document.getElementById("imgs");
+        $("#avaUrl").attr("src","/register/showImage?path="+img.defaultValue);
+
+        //判断是登录还是注册
+        var img02 = document.getElementById("imgs02");
+        if (img02!=null){
+            $("#avaUrl02").attr("src","/register/showImage?path="+img.defaultValue);
+        }else{
+            $("#avaUrl02").attr("src",'/images/default-avatar.png');
+        }
+    }
+</script>
 </html>

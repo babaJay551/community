@@ -8,6 +8,7 @@ import com.wujie.community.service.UserService;
 import com.wujie.community.utils.AppFileUtils;
 import com.wujie.community.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -107,6 +108,15 @@ public class RegisterController {
         Map<String,Object> map=new HashMap<String, Object>();
         map.put("path", dirName+"/"+newName+"_temp");
         return map;
+    }
+
+    /**
+     * 图片展示
+     */
+    @RequestMapping("/showImage")
+    public ResponseEntity<Object> showImage(String path){
+
+        return AppFileUtils.createResponseEntity(path);
     }
 
 }

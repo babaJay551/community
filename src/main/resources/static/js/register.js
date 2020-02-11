@@ -72,6 +72,14 @@ layui.use(['layer', 'upload', 'element', 'form', 'layedit'], function () {
         }
     });
 
+    //判断是登录还是注册
+    var img = document.getElementById("imgs");
+    if (img!=null){
+        $("#demo1").attr("src","/register/showImage?path="+img.defaultValue);
+    }else{
+        $("#demo1").attr("src",'/images/mr.png');
+    }
+
     //注册
     form.on('submit(formDemo)', function (result) {
         debugger
@@ -90,7 +98,6 @@ layui.use(['layer', 'upload', 'element', 'form', 'layedit'], function () {
                     layer.msg(res.message);
                 } else {
                     //跳转到登录页面
-                    var session = $("#us").val();
                     if (session!=null){
                         location.href = "/";
                     }else{
@@ -101,7 +108,7 @@ layui.use(['layer', 'upload', 'element', 'form', 'layedit'], function () {
         });
     })
 
-//普通图片上传
+    //普通图片上传
     var uploadInst = upload.render({
         elem: '#test1'
         , url: '/register/uploadFile' //改成您自己的上传接口

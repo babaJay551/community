@@ -13,6 +13,7 @@
 <div id="gb">
     <form class="layui-form" action="">
         <input type="hidden" id="us" th:value="${session.user}">
+        <input type="hidden" id="imgs" th:if="${session.user!=null}" th:value="${session.user.avatarUrl}">
         <input type="hidden" name="id" th:if="${session.user!=null}" th:value="${session.user.id}">
         <div class="registerbox-title">用户注册中心</div>
         <div class="layui-form-item">
@@ -58,7 +59,8 @@
             <div class="layui-upload">
                 <button type="button" class="layui-btn" id="test1">上传图片</button>
                 <div class="layui-upload-list">
-                    <img class="layui-upload-img" th:src="${session.user!=null?session.user.avatarUrl:'/images/mr.png'}"
+                    <!--<img class="layui-upload-img" th:src="${session.user!=null?session.user.avatarUrl:'/images/mr.png'}"-->
+                    <img class="layui-upload-img"
                          width="100px" height="100px" id="demo1">
                     <p id="demoText"></p>
                 </div>

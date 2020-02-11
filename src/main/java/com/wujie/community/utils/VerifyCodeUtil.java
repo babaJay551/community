@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * 生成图片二维码方法工具类
+ */
+
 public final class VerifyCodeUtil {
 
         // 验证码字符集

@@ -6,7 +6,6 @@ import com.wujie.community.model.User;
 import com.wujie.community.provider.GithubProvider;
 import com.wujie.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,17 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+/**
+ * 第三方登录功能（弃用）
+ */
+
 @Controller
 public class AuthorizeController {
 
     @Autowired
     private GithubProvider githubProvider;
 
-    @Value("${github.client.id}")
+//    @Value("${github.client.id}")
     private String clientid;
-    @Value("${github.client.secret}")
+//    @Value("${github.client.secret}")
     private String clientSecret;
-    @Value("${github.redirect.uri}")
+//    @Value("${github.redirect.uri}")
     private String redirectUri;
 
     @Autowired
